@@ -1,0 +1,23 @@
+label {
+  color: darkgray;
+  font-size: 12px;
+  font-family: sans-serif;
+}
+.selectContainer {
+  width: 250px;
+  border: 1px solid #dfdfdf;
+  padding: 2px 8px 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: sans-serif;
+  margin: 4px 0px;
+}
+.selectContainer select {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: inherit;
+}
+.selectContainer select option {
+  font-size: inherit;
+}

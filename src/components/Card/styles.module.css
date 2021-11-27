@@ -1,0 +1,7 @@
+.cardContainer {
+  background-color: white;
+  border-radius: 6px;
+  padding: 20px 30px;
+  margin: 30px 0px;
+  min-height: 100px;
+}
