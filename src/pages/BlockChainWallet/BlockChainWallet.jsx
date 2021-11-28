@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import FeeSection from "./components/FeeSection";
 import ReceiverSection from "./components/ReceiverSection";
+import TransactionSection from "./components/TransactionSection";
 import SenderSection from "./components/SenderSection";
 import Typography from "components/Typography";
 
@@ -9,7 +10,10 @@ const addresses = [
   "boa1456fjknd12345345908nnn78z52n",
   "boa1456fjknd12345345908nnn79z70n",
 ];
-const senderAddress = "boa1456fjknd12345345908nnn1324234";
+const _senderAddresses = [
+  "boa1456fjknd12345345908nnn1324234",
+  "boa9996fjknd12345345908nnn97532",
+];
 const feeOptions = ["Medium", "Selection"];
 const headerRows = [
   {
@@ -47,6 +51,7 @@ function BlockChainWallet(props) {
   const [amount, setAmount] = useState();
   const [fee, setFee] = useState(2.52);
   const [receiverAddress, setReceiverAddress] = useState(addresses[0]);
+  const [senderAddress, setSenderAddress] = useState(_senderAddresses[0]);
   const [feeOption, setFeeOption] = useState(feeOptions[0]);
   const [transactions, setTransactions] = useState([]);
   const [senderAmount, setSenderAmount] = useState(100.9999999);
@@ -60,6 +65,12 @@ function BlockChainWallet(props) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     switch (name) {
+      case "Sender Address":
+        setSenderAddress(value);
+        break;
+      case "Sender Amount":
+        if (!isNaN(value)) setSenderAmount(value);
+        break;
       case "Address":
         setReceiverAddress(value);
         break;
@@ -91,7 +102,7 @@ function BlockChainWallet(props) {
         feeOption,
       },
     ]);
-    setSenderAmount(senderAmount - amount);
+    setSenderAmount(senderAmount - amount < 0 ? "" : senderAmount - amount);
   };
   const handleDelete = (id) =>
     setTransactions(transactions.filter((t) => t.id !== id));
@@ -116,6 +127,13 @@ function BlockChainWallet(props) {
           borderRadius: 5,
         }}
       >
+        <SenderSection
+          textInputLabel="Sender Amount"
+          dropdownLabel={"Sender Address"}
+          amount={senderAmount}
+          addresses={_senderAddresses}
+          onChange={handleChange}
+        />
         <ReceiverSection
           textInputLabel="Amount"
           dropdownLabel={"Address"}
@@ -130,7 +148,7 @@ function BlockChainWallet(props) {
           feeOptions={feeOptions}
           onChange={handleChange}
         />
-        <SenderSection
+        <TransactionSection
           transactions={transactions}
           headerRows={headerRows}
           onDelete={handleDelete}

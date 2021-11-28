@@ -1,35 +1,42 @@
 import React from "react";
 
-import Card from "components/Card";
+import AddressDropdown from "components/Dropdown";
 import RowContainer from "components/RowContainer";
 import Typography from "components/Typography";
-import Table from "components/Table";
-import Button from "components/Button";
+import Card from "components/Card";
+import TextInput from "components/TextInput";
 
 function SenderSection({
-  transactions,
-  headerRows,
-  onDelete,
-  onAddSender,
-  isSendAble,
+  textInputLabel,
+  dropdownLabel,
+  amount,
+  addresses,
+  onChange,
 }) {
   return (
     <Card>
+      <Typography type="h3">Sender</Typography>
       <RowContainer
         styles={{
-          with: "100%",
+          width: "60%",
           justifyContent: "space-between",
-          margin: "20px 0px",
+          margin: "15px 0px",
         }}
       >
-        <Typography type="h3">Sender</Typography>
-        <Button
-          title="Add Sender"
-          onClick={onAddSender}
-          disabled={isSendAble}
+        <AddressDropdown
+          label={dropdownLabel}
+          name={dropdownLabel}
+          options={addresses}
+          onChange={onChange}
+        />
+        <TextInput
+          label={textInputLabel}
+          name={textInputLabel}
+          type="text"
+          value={amount}
+          onChange={onChange}
         />
       </RowContainer>
-      <Table headerRows={headerRows} rows={transactions} onDelete={onDelete} />
     </Card>
   );
 }
