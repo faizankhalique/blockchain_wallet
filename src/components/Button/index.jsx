@@ -5,6 +5,7 @@ import classes from "./styles.module.css";
 function Button({ title, onClick, disabled = false }) {
   return (
     <button
+      data-testid="button"
       type="button"
       disabled={disabled}
       onClick={onClick}

@@ -7,7 +7,13 @@ function TextInput({ label, value, type, name, onChange }) {
     <div>
       <label>{label}</label>
       <div className={classes.container}>
-        <input type={type} value={value} name={name} onChange={onChange} />
+        <input
+          data-testid="input"
+          type={type}
+          value={value}
+          name={name}
+          onChange={onChange}
+        />
         {value && (
           <label style={{ fontSize: 12, color: "black", marginTop: 3 }}>
             BOA

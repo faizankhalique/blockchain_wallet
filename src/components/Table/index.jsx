@@ -7,22 +7,22 @@ function Table({ headerRows, rows, onDelete }) {
   return (
     <table>
       <tr>
-        {headerRows.map((item) => (
-          <th>{item.label}</th>
+        {headerRows?.map((item) => (
+          <th key={item.label}>{item.label}</th>
         ))}
       </tr>
-      {rows.map((item, i) => (
+      {rows?.map((item, i) => (
         <tr key={i}>
-          {headerRows.map((r) => (
+          {headerRows?.map((r, i) => (
             <>
               {r.id === "action" ? (
-                <td onClick={() => onDelete(item.id)}>
+                <td key={i} onClick={() => onDelete(item.id)}>
                   <img style={{ height: 20, with: 20 }} src="./trash-bin.png" />
                 </td>
               ) : (
                 <>
                   {r.id === "address" ? (
-                    <td>
+                    <td key={i}>
                       <img
                         style={{ height: 18, with: 18, marginRight: 20 }}
                         src="./home.png"
@@ -31,6 +31,7 @@ function Table({ headerRows, rows, onDelete }) {
                     </td>
                   ) : (
                     <td
+                      key={i}
                       style={{
                         color: parseInt(item[r.id]) > 0 ? "black" : "red",
                       }}
